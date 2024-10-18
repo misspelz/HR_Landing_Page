@@ -143,7 +143,7 @@ const Nav = () => {
           </ul>
         </div>
 
-        <div className="hidden md:flex items-center gap-[16px] md:gap-[18px]">
+        <div className="hidden lg:flex items-center gap-[16px] md:gap-[18px]">
           <Link to="/">
             <PrimaryBtn className="bg-blue-600 hover:bg-blue-500 w-[150px] h-[38px]  flex justify-center items-center text-[#fff] duration-500 transition">
               Contact Us
