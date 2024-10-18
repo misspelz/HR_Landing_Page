@@ -1,8 +1,10 @@
 import PrimaryBtn from "@components/button";
 import Container from "@components/container";
+import Typewriter from "@components/typewriter";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
+
   return (
     <div
     className="relative h-[500px] w-full bg-cover bg-center bg-no-repeat"
@@ -23,7 +25,7 @@ const Hero = () => {
             }}
             className="text-[24px] md:text-[32px] text-[#fff] lg:text-[48px] text-center font-[700] lg:leading-[57px] lg:w-[700px]"
           >
-            Unlock The Full Potential For Your Workforce
+            <Typewriter text= "UUnlock The Full Potential For Your Workforce" speed={50}/>
           </h1>
           <h3 className="text-[16px] lg:text-[18px] font-[500]  text-[#fff]  lg:w-[800px] lg:leading-[28px]  text-center">
           By providing the right tools, training, and strategies, businesses can create an environment where employees feel engaged, motivated, and equipped to excel. This approach not only enhances individual performance but also fosters collaboration and a growth mindset across the organization, leading to sustainable success and competitive advantage.

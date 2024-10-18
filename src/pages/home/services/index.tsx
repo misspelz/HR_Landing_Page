@@ -1,38 +1,6 @@
-import { ReactNode } from "react";
-import {
-  FaUsers,
-  FaBriefcase,
-  FaChartLine,
-  FaHandHoldingUsd,
-  FaGlobe,
-} from "react-icons/fa";
-
-const services = [
-  {
-    icon: <FaUsers size={24} aria-label="Employee Management Icon" />,
-    text: "Comprehensive Employee Management",
-  },
-  {
-    icon: <FaBriefcase size={24} aria-label="Recruitment Solutions Icon" />,
-    text: "Streamlined Recruitment Solutions",
-  },
-  {
-    icon: <FaChartLine size={24} aria-label="Performance Analytics Icon" />,
-    text: "Real-time Performance Analytics",
-  },
-  {
-    icon: <FaHandHoldingUsd size={24} aria-label="Payroll and Benefits Icon" />,
-    text: "Efficient Payroll and Benefits Management",
-  },
-  {
-    icon: <FaGlobe size={24} aria-label="Global HR Compliance Icon" />,
-    text: "Global HR Compliance and Reporting",
-  },
-];
-
-interface IconWrapperProps {
-  icon: ReactNode;
-}
+import { IconWrapperProps } from "../../../types/Icon";
+import { services } from "@utils/index";
+import { useEffect, useRef, useState } from "react";
 
 const IconWrapper: React.FC<IconWrapperProps> = ({ icon }) => (
   <div className="w-[44px] h-[44px] bg-blue-600 rounded-full flex justify-center items-center text-white shrink-0">
@@ -41,6 +9,40 @@ const IconWrapper: React.FC<IconWrapperProps> = ({ icon }) => (
 );
 
 const Services = () => {
+  const [visibleServices, setVisibleServices] = useState<number[]>([]);
+  const serviceRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-index"));
+            if (!visibleServices.includes(index)) {
+              setVisibleServices((prev) => [...prev, index]);
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    serviceRefs.current.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      serviceRefs.current.forEach((ref) => {
+        if (ref) {
+          observer.unobserve(ref);
+        }
+      });
+    };
+  }, [visibleServices]);
+
   return (
     <div id="services" className="pt-[20px] pb-[40px] lg:py-[40px]">
       <div className="flex flex-col lg:flex-row justify-between items-center gap-[40px] lg:gap-[80px]">
@@ -62,7 +64,16 @@ const Services = () => {
         <div className="w-full lg:w-[50%]">
           <div className="flex flex-col gap-[15px]">
             {services.map((service, index) => (
-              <div key={index} className="flex gap-[24px] items-center">
+              <div
+                key={index}
+                data-index={index}
+                ref={(el) => (serviceRefs.current[index] = el)}
+                className={`flex gap-[24px] items-center transition-transform duration-700 ${
+                  visibleServices.includes(index)
+                    ? "translate-x-0 opacity-100"
+                    : "translate-x-4 opacity-0"
+                }`}
+              >
                 <IconWrapper icon={service.icon} />
                 <h3 className="text-[16px] lg:text-[18px] font-[500] lg:leading-[28px]">
                   {service.text}

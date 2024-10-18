@@ -1,7 +1,42 @@
+import { useEffect, useRef, useState } from "react";
+
 const About = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
   return (
     <div id="about" className="pt-[40px] pb-[20px] lg:py-[40px]">
-      <div className="flex flex-col lg:flex-row justify-between items-center gap-[20px] lg:gap-[80px]">
+      <div
+        ref={ref}
+        className={`flex flex-col lg:flex-row justify-between items-center gap-[20px] lg:gap-[80px] transition-transform duration-700 ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
         <div className="w-full lg:w-[50%] flex flex-col gap-[8px]">
           <h2
             style={{
@@ -13,7 +48,8 @@ const About = () => {
             About Us
           </h2>
           <h3 className="text-[16px] lg:text-[18px] font-[500] lg:leading-[28px]">
-          We are passionate about driving innovation and delivering exceptional solutions tailored to meet your unique needs. 
+            We are passionate about driving innovation and delivering
+            exceptional solutions tailored to meet your unique needs.
           </h3>
 
           {/* Mission Section */}
