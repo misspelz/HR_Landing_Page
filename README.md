@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# Human Resource Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An engaging human resource landing page built with React and Vite. This page showcases our services and mission while providing a modern, responsive design.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Navbar**: A navigation bar that links to different sections of the page.
+- **Hero Section**: A visually appealing hero section that introduces the brand.
+- **About Us Section**: Detailed information about our mission and vision.
+- **Services Section**: Highlights the services we offer with icons.
+- **Footer**: Contains contact information and links to social media.
+- **Responsive Design**: The layout adapts seamlessly across all devices (mobile, tablet, and desktop).
 
-## Expanding the ESLint configuration
+## Color Palette
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The color palette includes:
+- **Blue**: For accents and highlights.
+- **White**: For a clean and modern background.
+- **Slate**: For text elements.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- [React](https://reactjs.org/) - For building the application.
+- [Vite](https://vitejs.dev/) - For a fast development environment.
+- [Tailwind CSS](https://tailwindcss.com/) - For styling and responsive design.
+- [React Icons](https://react-icons.github.io/react-icons/) - For using various icons in the services section.
